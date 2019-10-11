@@ -1,5 +1,7 @@
 package br.edu.ifpb.semiti.api.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class CursoService {
 	
 	public Curso salvar(Curso curso) {
 		return cursoRepository.save(curso);
+	}
+	
+	public List<Curso> listar() {
+		return cursoRepository.findAll();
 	}
 	
 }

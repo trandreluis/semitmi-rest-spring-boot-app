@@ -1,6 +1,5 @@
 package br.edu.ifpb.semiti.api.resource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,22 +27,7 @@ public class CursoResource {
 
 	@GetMapping
 	public ResponseEntity<List<Curso>> listar() {
-		List<Curso> cursos = new ArrayList<>();
-
-		for (int i = 0; i < 10; i++) {
-			Curso curso = new Curso();
-
-			// somente convertendo de int para Long para definir o codigo do curso
-			// dinamicamente
-			Long longCodigo = Long.parseLong(i + "");
-
-			curso.setCodigo(longCodigo);
-			curso.setNome("ADS " + i);
-			curso.setQuantidadeDePeriodos(i);
-
-			cursos.add(curso);
-		}
-
+		List<Curso> cursos = cursoService.listar();
 		if (cursos.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
