@@ -1,4 +1,4 @@
-package br.edu.ifpb.semiti.model;
+package br.edu.ifpb.semiti.api.model;
 
 import java.io.Serializable;
 
@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "curso")
 public class Curso implements Serializable {
 
 	private static final long serialVersionUID = 168723694L;
@@ -22,7 +24,7 @@ public class Curso implements Serializable {
 	
 	@Column(name = "quantidade_periodos")
 	private Integer quantidadeDePeriodos;
-
+	
 	public Long getCodigo() {
 		return codigo;
 	}

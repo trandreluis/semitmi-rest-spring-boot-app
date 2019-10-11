@@ -1,4 +1,4 @@
-package br.edu.ifpb.semiti;
+package br.edu.ifpb.semiti.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
