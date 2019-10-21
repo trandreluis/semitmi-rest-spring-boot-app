@@ -7,23 +7,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "curso")
-public class Curso implements Serializable {
+@Table(name = "aluno")
+public class Aluno implements Serializable {
 
-	private static final long serialVersionUID = 168723694L;
+	private static final long serialVersionUID = 5327236726L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
 	@Column(name = "nome")
+	@NotBlank
 	private String nome;
 
-	@Column(name = "quantidade_periodos")
-	private Integer quantidadeDePeriodos;
+	@Column(name = "periodo_atual")
+	@NotNull
+	@Min(1)
+	@Max(7)
+	private Integer periodoAtual;
+
+	@ManyToOne
+	@JoinColumn(name = "codigo_curso")
+	@NotNull
+	private Curso curso;
 
 	public Long getCodigo() {
 		return codigo;
@@ -41,12 +56,20 @@ public class Curso implements Serializable {
 		this.nome = nome;
 	}
 
-	public Integer getQuantidadeDePeriodos() {
-		return quantidadeDePeriodos;
+	public Integer getPeriodoAtual() {
+		return periodoAtual;
 	}
 
-	public void setQuantidadeDePeriodos(Integer quantidadeDePeriodos) {
-		this.quantidadeDePeriodos = quantidadeDePeriodos;
+	public void setPeriodoAtual(Integer periodoAtual) {
+		this.periodoAtual = periodoAtual;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 	@Override
@@ -65,7 +88,7 @@ public class Curso implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Curso other = (Curso) obj;
+		Aluno other = (Aluno) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
@@ -76,7 +99,7 @@ public class Curso implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Curso [codigo=" + codigo + ", nome=" + nome + ", quantidadeDePeriodos=" + quantidadeDePeriodos + "]";
+		return "Aluno [codigo=" + codigo + ", nome=" + nome + ", periodoAtual=" + periodoAtual + "]";
 	}
 
 }

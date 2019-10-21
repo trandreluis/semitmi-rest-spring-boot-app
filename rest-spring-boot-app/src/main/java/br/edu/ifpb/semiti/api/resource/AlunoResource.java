@@ -16,46 +16,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifpb.semiti.api.model.Curso;
-import br.edu.ifpb.semiti.api.service.CursoService;
+import br.edu.ifpb.semiti.api.model.Aluno;
+import br.edu.ifpb.semiti.api.service.AlunoService;
 
 @RestController
-@RequestMapping("/cursos")
-public class CursoResource {
+@RequestMapping("/alunos")
+public class AlunoResource {
 
 	@Autowired
-	private CursoService cursoService;
+	private AlunoService alunoService;
 
 	@PostMapping
-	public ResponseEntity<Curso> salvar(@RequestBody @Valid Curso curso) {
-		Curso cursoSalvo = cursoService.salvar(curso);
-		return ResponseEntity.status(HttpStatus.CREATED).body(cursoSalvo);
+	public ResponseEntity<Aluno> salvar(@RequestBody @Valid Aluno aluno) {
+		Aluno alunoSalvo = alunoService.salvar(aluno);
+		return ResponseEntity.status(HttpStatus.CREATED).body(alunoSalvo);
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Curso>> listar() {
-		List<Curso> cursos = cursoService.listar();
-		if (cursos.isEmpty()) {
+	public ResponseEntity<List<Aluno>> listar() {
+		List<Aluno> alunos = alunoService.listar();
+		if (alunos.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
-		return ResponseEntity.ok().body(cursos);
+		return ResponseEntity.ok().body(alunos);
 	}
 
 	@GetMapping("/{codigo}")
-	public ResponseEntity<Curso> buscarPorCodigo(@PathVariable Long codigo) {
-		Curso cursoRecuperado = cursoService.buscarPorCodigo(codigo);
-		return ResponseEntity.ok(cursoRecuperado);
+	public ResponseEntity<Aluno> buscarPorCodigo(@PathVariable Long codigo) {
+		Aluno alunoRecuperado = alunoService.buscarPorCodigo(codigo);
+		return ResponseEntity.ok(alunoRecuperado);
 	}
 
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Curso> buscarPorCodigo(@PathVariable Long codigo, @RequestBody Curso curso) {
-		Curso cursoAtualizado = cursoService.atualizar(codigo, curso);
-		return ResponseEntity.ok(cursoAtualizado);
+	public ResponseEntity<Aluno> buscarPorCodigo(@PathVariable Long codigo, @RequestBody Aluno aluno) {
+		Aluno alunoAtualizado = alunoService.atualizar(codigo, aluno);
+		return ResponseEntity.ok(alunoAtualizado);
 	}
 
 	@DeleteMapping("/{codigo}")
 	public ResponseEntity<Void> deletar(@PathVariable Long codigo) {
-		cursoService.deletar(codigo);
+		alunoService.deletar(codigo);
 		return ResponseEntity.noContent().build();
 	}
 
